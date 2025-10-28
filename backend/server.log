@@ -1,0 +1,6 @@
+Server started on http://localhost:8080
+API available at:
+  GET /api/players
+  GET /api/matches
+  GET /api/stats
+  GET /api/player/{id}

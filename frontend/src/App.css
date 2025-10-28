@@ -1,0 +1,391 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #000;
+  color: #fff;
+  line-height: 1.6;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #333;
+  padding: 20px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 28px;
+  letter-spacing: 3px;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
+.header p {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 1px;
+}
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.navbar button {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar button:hover {
+  background-color: #1a1a1a;
+}
+
+.navbar button.active {
+  border-bottom: 2px solid #fff;
+  font-weight: bold;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* Players Tab */
+.players-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.players-list {
+  background-color: rgba(17, 17, 17, 0.9);
+  border: 1px solid #333;
+  height: 500px;
+  overflow-y: auto;
+}
+
+.players-list h3 {
+  padding: 15px;
+  border-bottom: 1px solid #333;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.player-item {
+  padding: 15px;
+  border-bottom: 1px solid #222;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.player-item:hover {
+  background-color: #1a1a1a;
+}
+
+.player-item.selected {
+  background-color: #1a1a1a;
+}
+
+.player-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.player-info {
+  font-size: 12px;
+  color: #999;
+}
+
+.player-details {
+  background-color: rgba(17, 17, 17, 0.9);
+  border: 1px solid #333;
+  padding: 20px;
+}
+
+.player-details h3 {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.detail-row {
+  margin-bottom: 15px;
+}
+
+.detail-label {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  font-size: 14px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.stat-box {
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 15px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Matches Tab */
+.matches-container {
+  display: flex;
+  gap: 30px;
+}
+
+.matches-table-container {
+  flex: 1;
+  background-color: #111;
+  border: 1px solid #333;
+}
+
+.matches-table-header {
+  padding: 15px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.matches-table-header h3 {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-group label {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.filter-group select,
+.filter-group input {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.filter-group select:hover,
+.filter-group input:hover {
+  border-color: #555;
+}
+
+.matches-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.matches-table th {
+  background-color: #0a0a0a;
+  padding: 12px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #333;
+}
+
+.matches-table td {
+  padding: 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #222;
+}
+
+.matches-table tr:hover {
+  background-color: #1a1a1a;
+}
+
+.match-type {
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.win-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 8px;
+}
+
+.win-indicator.won {
+  background-color: #fff;
+}
+
+.win-indicator.lost {
+  background-color: #666;
+}
+
+.match-details {
+  width: 300px;
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 20px;
+}
+
+.match-details h3 {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+/* Stats Tab */
+.stats-container {
+  display: grid;
+  gap: 30px;
+}
+
+.stats-section {
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 20px;
+}
+
+.stats-section h3 {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.overall-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.season-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.player-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.player-stats-table th {
+  background-color: #0a0a0a;
+  padding: 10px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #333;
+}
+
+.player-stats-table td {
+  padding: 10px;
+  font-size: 13px;
+  border-bottom: 1px solid #222;
+}
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-top: 1px solid #333;
+  padding: 20px;
+  text-align: center;
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.search-box {
+  margin-bottom: 15px;
+}
+
+.search-box input {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #555;
+}
+

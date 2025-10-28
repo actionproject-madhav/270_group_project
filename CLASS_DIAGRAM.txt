@@ -1,0 +1,238 @@
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                ROLLINS TENNIS ARCHIVE - COMPLETE CLASS DIAGRAM                   ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          APPLICATION LAYER                                       │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  ┌──────────────────────────────────────────────────────────────────────────┐  │
+│  │                        TennisArchiveApp                                   │  │
+│  │                    (JavaFX Application)                                   │  │
+│  ├──────────────────────────────────────────────────────────────────────────┤  │
+│  │                                                                           │  │
+│  │  Fields:                                                                  │  │
+│  │    • RosterManager rosterManager                                         │  │
+│  │    • MatchRepository matchRepository                                      │  │
+│  │    • StatsService statsService                                           │  │
+│  │                                                                           │  │
+│  │  Methods:                                                                │  │
+│  │    + start(Stage): void                                                  │  │
+│  │    + initializeSampleData(): void                                        │  │
+│  │    + createPlayersTabContent(): VBox                                     │  │
+│  │    + createMatchesTabContent(): VBox                                      │  │
+│  │    + createStatsTabContent(): VBox                                        │  │
+│  │    - displayPlayerDetails(...): void                                    │  │
+│  │    - displayMatchDetails(...): void                                     │  │
+│  │    - generatePlayerStats(): String                                      │  │
+│  │                                                                           │  │
+│  └──────────────────────────────────────────────────────────────────────────┘  │
+│                                         │                                       │
+│                                         │ uses                                  │
+│                                         ▼                                       │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                            MANAGER LAYER                                        │
+├──────────────────┬────────────────────┬────────────────────────────────────────┤
+│                  │                    │                                         │
+│  ┌──────────────┴───────┐  ┌────────┴──────────┐  ┌─────────────────────────┐ │
+│  │  RosterManager       │  │  MatchRepository  │  │   StatsService         │ │
+│  ├──────────────────────┤  ├───────────────────┤  ├─────────────────────────┤ │
+│  │ Fields:              │  │ Fields:            │  │ Fields:                 │ │
+│  │  • List<Player>      │  │ • List<Match>     │  │ • MatchRepository       │ │
+│  │  • Map<String,       │  │ • Map<Season,     │  │                         │ │
+│  │       Player>        │  │        List<Match>>│ │                         │ │
+│  │                      │  │                   │ │                         │ │
+│  │ Methods:             │  │ Methods:          │ │ Methods:                │ │
+│  │  + addPlayer(...)    │  │ + addMatch(...)   │ │ + getWinLossByPlayer()  │ │
+│  │  + findPlayerById()  │  │ + getAllMatches() │ │ + getWinLossBySeason()  │ │
+│  │  + searchPlayers()   │  │ + getMatchesBy    │ │ + getWinLossByType()    │ │
+│  │  + removePlayer()    │  │    Season()       │ │ + getOverallRecord()    │ │
+│  │  + getAllPlayers()   │  │ + filterMatches() │ │ + getWinPercentage()    │ │
+│  │                      │  │ + getMatchesBy    │ │                         │ │
+│  │ Uses: HashMap for    │  │   Type()         │ │                         │ │
+│  │ O(1) lookup          │  │ + getMatchesBy   │ │                         │ │
+│  │                      │  │   Opponent()      │ │                         │ │
+│  └──────────┬───────────┘  └────────┬─────────┘  └─────────────────────────┘ │
+│             │                        │                                         │
+│             │ manages                │ manages                                │
+│             ▼                        ▼                                         │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                             DOMAIN LAYER                                       │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  ┌────────────┬───────────┬────────────┐                                        │
+│  │  Player    │  Season   │  Result    │                                        │
+│  ├────────────┤  (Enum)   ├────────────┤                                        │
+│  │Fields:     │           │Fields:     │                                        │
+│  │• id        │  Values:  │• score     │                                        │
+│  │• firstName │  • 2022   │• rollinsWon│                                        │
+│  │• lastName  │  • 2023   │            │                                        │
+│  │• classYear │  • 2024   │Methods:    │                                        │
+│  │• national  │           │+ isValid   │                                        │
+│  │• utr       │           │  Score()   │                                        │
+│  │            │           │            │                                        │
+│  │Methods:    │           │            │                                        │
+│  │+ getX()    │           │            │                                        │
+│  │+ setX()    │           │            │                                        │
+│  │+ getFull   │           │            │                                        │
+│  │  Name()    │           │            │                                        │
+│  └────────────┴───────────┴────────────┘                                        │
+│                                                                                  │
+│  ┌────────────────────────────────────────────────────────────────────────┐   │
+│  │                           Match (ABSTRACT) ⭐                           │   │
+│  ├────────────────────────────────────────────────────────────────────────┤   │
+│  │                                                                        │   │
+│  │  Fields:                                                                │   │
+│  │    • LocalDate date                                                    │   │
+│  │    • Season season                                                     │   │
+│  │    • Result result                                                     │   │
+│  │    • String opponent                                                   │   │
+│  │                                                                        │   │
+│  │  Concrete Methods:                                                     │   │
+│  │    + getDate()                                                         │   │
+│  │    + getSeason()                                                       │   │
+│  │    + getResult()                                                       │   │
+│  │    + getOpponent()                                                     │   │
+│  │    + getWinners()                                                      │   │
+│  │                                                                        │   │
+│  │  Abstract Methods:                                                     │   │
+│  │    ⭐ + getWinner(): boolean                                           │   │
+│  │    ⭐ + getParticipants(): List<Player>                                │   │
+│  │    ⭐ + getMatchType(): String                                         │   │
+│  │                                                                        │   │
+│  └────────────────┬───────────────────┬────────────────────────────────────┘   │
+│                   │                   │                                        │
+│                   │ extends           │ extends                               │
+│                   │                   │                                        │
+│                   ▼                   ▼                                        │
+│  ┌─────────────────────────┐  ┌─────────────────────────┐                     │
+│  │    SinglesMatch         │  │    DoublesMatch          │                     │
+│  ├─────────────────────────┤  ├─────────────────────────┤                     │
+│  │ Fields:                 │  │ Fields:                 │                     │
+│  │ • rollinsPlayer         │  │ • rollinsPlayer1        │                     │
+│  │ • opponentPlayer        │  │ • rollinsPlayer2        │                     │
+│  │                         │  │ • opponentPair1         │                     │
+│  │ Methods:                │  │ • opponentPair2         │                     │
+│  │ + getWinner() ✓         │  │                         │                     │
+│  │ + getParticipants() ✓   │  │ Methods:                │                     │
+│  │ + getMatchType() ✓      │  │ + getWinner() ✓         │                     │
+│  │                         │  │ + getParticipants() ✓   │                     │
+│  │ Returns: "Singles"      │  │ + getMatchType() ✓      │                     │
+│  │                         │  │ + getRollinsPair()       │                     │
+│  │                         │  │ + getOpponentPair()      │                     │
+│  │                         │  │                         │                     │
+│  │                         │  │ Returns: "Doubles"       │                     │
+│  └─────────────────────────┘  └─────────────────────────┘                     │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          RELATIONSHIPS                                          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  TennisArchiveApp ──uses──┐                                                      │
+│                           ├───► RosterManager ──manages──► Player               │
+│                           │                                                      │
+│                           ├───► MatchRepository ──manages──► Match             │
+│                           │                              │                       │
+│                           │                              ├──► SinglesMatch      │
+│                           │                              │                       │
+│                           └───► StatsService             └──► DoublesMatch      │
+│                                  │                                               │
+│                                  └───calculates──► Statistics                    │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          KEY OOP CONCEPTS                                       │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  1. ENCAPSULATION: All fields private, accessed via getters/setters            │
+│     Player: private String id; public String getId()                          │
+│                                                                                  │
+│  2. INHERITANCE: SinglesMatch and DoublesMatch extend Match                    │
+│     public class SinglesMatch extends Match { ... }                            │
+│                                                                                  │
+│  3. ABSTRACTION: Match is abstract class with abstract methods                 │
+│     abstract class Match {                                                     │
+│         public abstract boolean getWinner();                                   │
+│         public abstract List<Player> getParticipants();                        │
+│     }                                                                           │
+│                                                                                  │
+│  4. POLYMORPHISM: Single interface, multiple implementations                   │
+│     List<Match> matches = new ArrayList<>();                                   │
+│     matches.add(new SinglesMatch(...));  ✓                                     │
+│     matches.add(new DoublesMatch(...));  ✓                                     │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          DATA STRUCTURES                                        │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  ArrayList<Player>   - RosterManager.playerList                               │
+│  ArrayList<Match>    - MatchRepository.matches                                 │
+│  HashMap<String,    - RosterManager for O(1) ID lookup                        │
+│              Player>                                                             │
+│  Map<Season,        - MatchRepository for fast year filtering                  │
+│      List<Match>>                                                               │
+│                                                                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                       UML-STYLE RELATIONSHIPS                                   │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  +---------------+          +----------------+                                 │
+│  │ Player        │          │ Result         │                                 │
+│  +---------------+          +----------------+                                 │
+│  | - id          |          | - score        │                                 │
+│  | - firstName   |          | - rollinsWon   │                                 │
+│  | - lastName    |          +----------------+                                 │
+│  | - classYear   |                  ▲                                          │
+│  | - nationality │                  │ has                                      │
+│  | - utr         │                  │                                          │
+│  +---------------+                  │                                          │
+│         ▲                          │                                          │
+│         │ participates in          │                                          │
+│         │          ┌───────────────────┐                                      │
+│         │          │ Match (ABSTRACT) ⭐│                                      │
+│         │          ├───────────────────┤                                      │
+│         │          │ - date           │                                      │
+│         │          │ - season         │                                      │
+│         │          │ - opponent       │                                      │
+│         │          │ # getWinner()    │ ◄─── abstract method                 │
+│         │          │ # getPartici-    │                                      │
+│         │          │   pants()        │                                      │
+│         │          │ # getMatchType() │                                      │
+│         │          └──────┬─────────┬─┘                                      │
+│         │                 │         │                                        │
+│         │                 │         │ extends                                 │
+│         │                 ▼         ▼                                        │
+│         │    ┌─────────────┐ ┌─────────────┐                                │
+│         │    │ SinglesMatch│ │ DoublesMatch │                                │
+│         │    ├─────────────┤ ├─────────────┤                                │
+│         │    │ - rollins   │ │ - rollins1  │                                │
+│         │    │ - opponent  │ │ - rollins2  │                                │
+│         │    │ + getWinner│ │ - oppPair1  │                                │
+│         │    │    (...) ✓ │ │ - oppPair2  │                                │
+│         │    └─────────────┘ │ + getWinner()│                                │
+│         │                     │    (...) ✓   │                                │
+│         │                     └─────────────┘                                │
+│         │                                                                       │
+│         └──────────────────────────────────────────────────────────────────┘    │
+│                                                                                  │
+│  Legend:                                                                         │
+│    - private field                                                                │
+│    + public method                                                                │
+│    # protected/abstract method                                                    │
+│    ◄─── relationship direction                                                    │
+│    ⭐ abstract class                                                              │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+END OF DIAGRAM
+
