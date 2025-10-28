@@ -3,7 +3,7 @@
 
 ##  Overview  
 **Rollins Tennis Archive** is a Java-based desktop application that stores and displays **player bios** and **match results from the past three seasons** (singles & doubles).  
-The system provides an easy-to-use **JavaFX interface** that allows users to browse, search, and analyze player and match data — built to showcase strong **Object-Oriented Programming** principles.
+The system provides an easy-to-use React interface** that allows users to browse, search, and analyze player and match data, built to showcase strong **Object-Oriented Programming** principles.
 
 ---
 
@@ -39,6 +39,6 @@ The app is inspired by the **Rollins College Tennis Team**, aiming to organize t
 
 ##  Technology Stack  
 - **Language:** Java 17+  
-- **GUI Framework:** JavaFX  
+- **UI Framework:**  React 
 - **IDE Recommended:** IntelliJ IDEA / Eclipse / VS Code  
 - **Data Format:** JSON or CSV (sample data for players & matches)  
