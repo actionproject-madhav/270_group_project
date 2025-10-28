@@ -1,9 +1,9 @@
 #  Rollins Tennis Archive  
-*A Java OOP Project by Madhav Khanal, Stella Fruijtier and Richard Stoiberer
+*A Java OOP Project by Madhav Khanal, Stella Fruijtier and Richard Stoiberer*
 
 ##  Overview  
 **Rollins Tennis Archive** is a Java-based desktop application that stores and displays **player bios** and **match results from the past three seasons** (singles & doubles).  
-The system provides an easy-to-use React interface** that allows users to browse, search, and analyze player and match data, built to showcase strong **Object-Oriented Programming** principles.
+The system provides an easy-to-use **React interface** that allows users to browse, search, and analyze player and match data, built to showcase strong **Object-Oriented Programming** principles.
 
 ---
 
