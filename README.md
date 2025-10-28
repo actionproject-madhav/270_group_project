@@ -40,5 +40,5 @@ The app is inspired by the **Rollins College Tennis Team**, aiming to organize t
 ##  Technology Stack  
 - **Language:** Java 17+  
 - **UI Framework:**  React 
-- **IDE Recommended:** IntelliJ IDEA / Eclipse / VS Code  
+- **IDE:** Eclipse / VS Code  
 - **Data Format:** JSON or CSV (sample data for players & matches)  
