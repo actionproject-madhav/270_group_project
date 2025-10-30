@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { api } from '../services/api';
 
 function StatsTab() {
   const [overallStats, setOverallStats] = useState(null);
   const [seasonStats, setSeasonStats] = useState(null);
   const [playerStats, setPlayerStats] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState('All');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadStats();
-  }, [selectedSeason]);
-
-  const loadStats = async () => {
+  const loadStats = useCallback(async () => {
     try {
-      const overall = await api.getStats(selectedSeason);
+      const overall = await api.getStats('All');
       setOverallStats(overall);
       
       const allPlayers = await api.getPlayers();
@@ -42,7 +37,11 @@ function StatsTab() {
       console.error('Error loading stats:', error);
       setLoading(false);
     }
-  };
+  }, []); // No dependencies needed since we're using fixed values
+
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
   if (loading) {
     return <div className="loading">Loading...</div>;

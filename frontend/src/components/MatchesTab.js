@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { api } from '../services/api';
 
 function MatchesTab() {
@@ -11,11 +11,7 @@ function MatchesTab() {
   });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadMatches();
-  }, []);
-
-  const loadMatches = async () => {
+  const loadMatches = useCallback(async () => {
     try {
       const data = await api.getMatches(filters);
       setMatches(data);
@@ -24,15 +20,15 @@ function MatchesTab() {
       console.error('Error loading matches:', error);
       setLoading(false);
     }
-  };
+  }, [filters]);
+
+  useEffect(() => {
+    loadMatches();
+  }, [loadMatches]);
 
   const handleFilterChange = (filterName, value) => {
     setFilters({ ...filters, [filterName]: value });
   };
-
-  useEffect(() => {
-    loadMatches();
-  }, [filters.season, filters.type, filters.opponent]);
 
   if (loading) {
     return <div className="loading">Loading...</div>;
