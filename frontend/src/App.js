@@ -13,7 +13,8 @@ function App() {
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
-    zIndex: 1
+    zIndex: 1,
+    backgroundColor: 'transparent'
   };
 
   return (

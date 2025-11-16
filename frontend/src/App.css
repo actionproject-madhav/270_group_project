@@ -6,12 +6,17 @@
 
 body {
   font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
-  background: #000000;
+  background: transparent;
   color: #ffffff;
   line-height: 1.6;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+#root {
+  background: transparent;
+  min-height: 100vh;
 }
 
 /* Smooth scrollbar */
@@ -41,9 +46,9 @@ body {
 }
 
 .header {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(26, 26, 26, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   padding: 30px 20px;
   text-align: center;
   position: relative;
@@ -86,9 +91,9 @@ body {
 }
 
 .navbar {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   justify-content: center;
   gap: 0;
@@ -146,12 +151,12 @@ body {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   animation: fadeInUp 0.6s ease-out;
   position: relative;
   z-index: 10;
@@ -217,13 +222,13 @@ body {
 }
 
 .players-list {
-  background: rgba(17, 17, 17, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   height: 600px;
   overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .players-list h3 {
@@ -289,12 +294,12 @@ body {
 }
 
 .player-details {
-  background: rgba(17, 17, 17, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   animation: slideInRight 0.6s ease-out;
 }
 
@@ -424,11 +429,11 @@ body {
 
 .matches-table-container {
   flex: 1;
-  background: rgba(17, 17, 17, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -564,12 +569,12 @@ body {
 
 .match-details {
   width: 350px;
-  background: rgba(17, 17, 17, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   animation: slideInRight 0.6s ease-out;
 }
 
@@ -592,12 +597,12 @@ body {
 }
 
 .stats-section {
-  background: rgba(17, 17, 17, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -661,9 +666,9 @@ body {
 }
 
 .footer {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(26, 26, 26, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding: 25px;
   text-align: center;
   font-size: 12px;
