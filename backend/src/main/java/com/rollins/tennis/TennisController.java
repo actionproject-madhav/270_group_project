@@ -13,10 +13,63 @@ public class TennisController {
         this.rosterManager = new RosterManager();
         this.matchRepository = new MatchRepository();
         this.statsService = new StatsService(rosterManager, matchRepository);
-        initializeSampleData();
+        initializeData();
+    }
+    
+    private void initializeData() {
+        // Try to load from Excel files first
+        try {
+            // Get the base path - Excel files are in the project root (parent of backend)
+            String basePath = System.getProperty("user.dir");
+            java.io.File currentDir = new java.io.File(basePath);
+            
+            // Try to find the Excel files by checking current directory and parent directories
+            java.io.File excelFile = null;
+            java.io.File checkDir = currentDir;
+            
+            // Check up to 3 levels up
+            for (int i = 0; i < 3; i++) {
+                excelFile = new java.io.File(checkDir, "rawDataMensTennis.xlsx");
+                if (excelFile.exists()) {
+                    basePath = checkDir.getAbsolutePath();
+                    break;
+                }
+                checkDir = checkDir.getParentFile();
+                if (checkDir == null) break;
+            }
+            
+            if (excelFile == null || !excelFile.exists()) {
+                throw new Exception("Could not find Excel files. Looking in: " + basePath);
+            }
+            
+            ExcelDataLoader.PlayerMatchData data = ExcelDataLoader.loadData(basePath);
+            
+            // Add all players from Excel
+            for (Player player : data.players) {
+                try {
+                    rosterManager.addPlayer(player);
+                } catch (Exception e) {
+                    // Player might already exist, skip
+                    System.err.println("Could not add player: " + player.getFullName() + " - " + e.getMessage());
+                }
+            }
+            
+            // Add all matches from Excel
+            for (Match match : data.matches) {
+                matchRepository.addMatch(match);
+            }
+            
+            System.out.println("Loaded " + data.players.size() + " players and " + data.matches.size() + " matches from Excel files");
+            
+        } catch (Exception e) {
+            System.err.println("Error loading Excel data, falling back to sample data: " + e.getMessage());
+            e.printStackTrace();
+            initializeSampleData();
+        }
     }
     
     private void initializeSampleData() {
+        // Fallback sample data if Excel loading fails
         Player p1 = new Player("P001", "Pete", "Hutchinson", "2025", "USA", 12.5, "/images/pete.webp");
         Player p2 = new Player("P002", "Gusic", "Rollins", "2025", "Croatia", 11.8, "/images/gusic.webp");
         Player p3 = new Player("P003", "Luke", "Quaynor", "2026", "Australia", 13.2, "/images/luke.webp");

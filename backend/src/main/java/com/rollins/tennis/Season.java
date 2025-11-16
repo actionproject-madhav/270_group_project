@@ -20,7 +20,6 @@ public enum Season {
             if (season.year.equals(year)) {
                 return season;
             }
-        }
         throw new IllegalArgumentException("Invalid year: " + year);
     }
     
