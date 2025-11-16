@@ -12,6 +12,7 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 #root {
@@ -46,9 +47,8 @@ body {
 }
 
 .header {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding: 30px 20px;
   text-align: center;
   position: relative;
@@ -77,23 +77,21 @@ body {
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .header p {
   font-size: 14px;
-  color: #888;
+  color: #e0e0e0;
   letter-spacing: 1px;
   font-weight: 300;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .navbar {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   justify-content: center;
   gap: 0;
@@ -139,10 +137,11 @@ body {
 }
 
 .navbar button.active {
-  border-bottom: 3px solid #4CAF50;
-  background: rgba(76, 175, 80, 0.1);
-  color: #4CAF50;
+  border-bottom: 3px solid #FFA726;
+  background: rgba(255, 167, 38, 0.15);
+  color: #FFA726;
   font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 167, 38, 0.5);
 }
 
 .content {
@@ -151,12 +150,11 @@ body {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.15);
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   animation: fadeInUp 0.6s ease-out;
   position: relative;
   z-index: 10;
@@ -222,24 +220,24 @@ body {
 }
 
 .players-list {
-  background: rgba(17, 17, 17, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   height: 600px;
   overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .players-list h3 {
   padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: rgba(76, 175, 80, 0.1);
-  color: #4CAF50;
+  background: rgba(255, 167, 38, 0.15);
+  color: #FFA726;
+  text-shadow: 0 0 8px rgba(255, 167, 38, 0.4);
 }
 
 .player-item {
@@ -267,14 +265,14 @@ body {
 }
 
 .player-item:hover {
-  background: rgba(76, 175, 80, 0.05);
+  background: rgba(255, 167, 38, 0.1);
   transform: translateX(5px);
-  border-left: 3px solid #4CAF50;
+  border-left: 3px solid #FFA726;
 }
 
 .player-item.selected {
-  background: rgba(76, 175, 80, 0.15);
-  border-left: 3px solid #4CAF50;
+  background: rgba(255, 167, 38, 0.2);
+  border-left: 3px solid #FFA726;
   transform: translateX(5px);
 }
 
@@ -294,12 +292,11 @@ body {
 }
 
 .player-details {
-  background: rgba(17, 17, 17, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   animation: slideInRight 0.6s ease-out;
 }
 
@@ -320,29 +317,30 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 15px;
-  color: #4CAF50;
+  color: #FFA726;
+  text-shadow: 0 0 8px rgba(255, 167, 38, 0.4);
 }
 
 .detail-row {
   margin-bottom: 20px;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   border-left: 3px solid transparent;
   transition: all 0.3s ease;
 }
 
 .detail-row:hover {
-  background: rgba(76, 175, 80, 0.05);
-  border-left: 3px solid #4CAF50;
+  background: rgba(255, 167, 38, 0.1);
+  border-left: 3px solid #FFA726;
   transform: translateX(5px);
 }
 
 .detail-label {
   font-size: 12px;
-  color: #888;
+  color: #d0d0d0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -363,8 +361,8 @@ body {
 }
 
 .stat-box {
-  background: rgba(76, 175, 80, 0.1);
-  border: 1px solid rgba(76, 175, 80, 0.3);
+  background: rgba(255, 167, 38, 0.15);
+  border: 1px solid rgba(255, 167, 38, 0.4);
   border-radius: 12px;
   padding: 20px;
   text-align: center;
@@ -390,20 +388,21 @@ body {
 
 .stat-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
-  border-color: #4CAF50;
+  box-shadow: 0 10px 25px rgba(255, 167, 38, 0.3);
+  border-color: #FFA726;
 }
 
 .stat-value {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #4CAF50;
+  color: #FFA726;
+  text-shadow: 0 0 10px rgba(255, 167, 38, 0.5);
 }
 
 .stat-label {
   font-size: 12px;
-  color: #ccc;
+  color: #e0e0e0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 500;
@@ -429,11 +428,10 @@ body {
 
 .matches-table-container {
   flex: 1;
-  background: rgba(17, 17, 17, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -453,7 +451,8 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #4CAF50;
+  color: #FFA726;
+  text-shadow: 0 0 8px rgba(255, 167, 38, 0.4);
 }
 
 .filters {
@@ -472,7 +471,7 @@ body {
 
 .filter-group label {
   font-size: 12px;
-  color: #888;
+  color: #d0d0d0;
   text-transform: uppercase;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -480,9 +479,9 @@ body {
 
 .filter-group select,
 .filter-group input {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   padding: 10px 12px;
   font-size: 13px;
@@ -492,15 +491,15 @@ body {
 
 .filter-group select:hover,
 .filter-group input:hover {
-  border-color: #4CAF50;
-  background: rgba(76, 175, 80, 0.1);
+  border-color: #FFA726;
+  background: rgba(255, 167, 38, 0.15);
 }
 
 .filter-group select:focus,
 .filter-group input:focus {
   outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  border-color: #FFA726;
+  box-shadow: 0 0 0 2px rgba(255, 167, 38, 0.3);
 }
 
 .matches-table {
@@ -509,15 +508,16 @@ body {
 }
 
 .matches-table th {
-  background: rgba(76, 175, 80, 0.1);
+  background: rgba(255, 167, 38, 0.15);
   padding: 18px 15px;
   text-align: left;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: #4CAF50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFA726;
+  text-shadow: 0 0 6px rgba(255, 167, 38, 0.4);
 }
 
 .matches-table td {
@@ -533,7 +533,7 @@ body {
 }
 
 .matches-table tr:hover {
-  background: rgba(76, 175, 80, 0.05);
+  background: rgba(255, 167, 38, 0.1);
   transform: scale(1.01);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -544,8 +544,9 @@ body {
   font-weight: 600;
   padding: 4px 8px;
   border-radius: 4px;
-  background: rgba(76, 175, 80, 0.2);
-  color: #4CAF50;
+  background: rgba(255, 167, 38, 0.25);
+  color: #FFA726;
+  text-shadow: 0 0 6px rgba(255, 167, 38, 0.4);
 }
 
 .win-indicator {
@@ -558,8 +559,8 @@ body {
 }
 
 .win-indicator.won {
-  background: linear-gradient(135deg, #4CAF50, #66BB6A);
-  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  background: linear-gradient(135deg, #FFA726, #FFB74D);
+  box-shadow: 0 0 10px rgba(255, 167, 38, 0.6);
 }
 
 .win-indicator.lost {
@@ -569,12 +570,11 @@ body {
 
 .match-details {
   width: 350px;
-  background: rgba(17, 17, 17, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   animation: slideInRight 0.6s ease-out;
 }
 
@@ -584,9 +584,10 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 15px;
-  color: #4CAF50;
+  color: #FFA726;
+  text-shadow: 0 0 8px rgba(255, 167, 38, 0.4);
 }
 
 /* Stats Tab */
@@ -597,12 +598,11 @@ body {
 }
 
 .stats-section {
-  background: rgba(17, 17, 17, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -617,9 +617,10 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 15px;
-  color: #4CAF50;
+  color: #FFA726;
+  text-shadow: 0 0 8px rgba(255, 167, 38, 0.4);
 }
 
 .overall-stats {
@@ -643,15 +644,16 @@ body {
 }
 
 .player-stats-table th {
-  background: rgba(76, 175, 80, 0.1);
+  background: rgba(255, 167, 38, 0.15);
   padding: 15px 12px;
   text-align: left;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: #4CAF50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFA726;
+  text-shadow: 0 0 6px rgba(255, 167, 38, 0.4);
 }
 
 .player-stats-table td {
@@ -662,22 +664,22 @@ body {
 }
 
 .player-stats-table tr:hover {
-  background: rgba(76, 175, 80, 0.05);
+  background: rgba(255, 167, 38, 0.1);
 }
 
 .footer {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
   padding: 25px;
   text-align: center;
   font-size: 12px;
-  color: #888;
+  color: #d0d0d0;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 300;
   position: relative;
   z-index: 10;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .search-box {
@@ -686,9 +688,9 @@ body {
 
 .search-box input {
   width: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   padding: 12px 15px;
   font-size: 14px;
@@ -698,9 +700,9 @@ body {
 
 .search-box input:focus {
   outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-  background: rgba(76, 175, 80, 0.05);
+  border-color: #FFA726;
+  box-shadow: 0 0 0 2px rgba(255, 167, 38, 0.3);
+  background: rgba(255, 167, 38, 0.1);
 }
 
 .search-box input::placeholder {
