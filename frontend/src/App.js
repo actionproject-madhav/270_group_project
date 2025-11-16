@@ -2,6 +2,7 @@ import React from 'react';
 import PlayersTab from './components/PlayersTab';
 import MatchesTab from './components/MatchesTab';
 import StatsTab from './components/StatsTab';
+import SplineBackground from './components/SplineBackground';
 import './App.css';
 
 function App() {
@@ -11,15 +12,13 @@ function App() {
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: "url('/images/tennis.jpg')",
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundAttachment: 'fixed',
-    backgroundRepeat: 'no-repeat'
+    position: 'relative',
+    zIndex: 1
   };
 
   return (
     <div className="App" style={appStyle}>
+      <SplineBackground />
       <header className="header">
         <h1>ROLLINS TENNIS ARCHIVE</h1>
         <p>Match Results & Player Statistics</p>
