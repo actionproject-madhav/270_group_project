@@ -63,9 +63,12 @@ public class ExcelDataLoader {
                 
                 String playerIdStr = String.format("%s%03d", teamType.equals("Men") ? "M" : "W", playerId++);
                 
+                // Find matching image based on player name
+                String imagePath = findPlayerImage(firstName, lastName);
+                
                 // Create player with default values (can be enhanced with actual data if available)
                 Player player = new Player(playerIdStr, firstName, lastName, "2025", 
-                                          inferNationality(lastName), 11.0, null);
+                                          inferNationality(lastName), 11.0, imagePath);
                 
                 if (!playerMap.containsKey(playerIdStr)) {
                     data.players.add(player);
@@ -137,6 +140,47 @@ public class ExcelDataLoader {
         if (lastName.isEmpty()) return "Unknown";
         // This is a placeholder - in a real system, you'd have a database or mapping
         return "Unknown";
+    }
+    
+    private static String findPlayerImage(String firstName, String lastName) {
+        // Map player names to image filenames in public/images folder
+        // Images are named after the player's last name (or first name in some cases)
+        String imageName = null;
+        
+        // Normalize names for matching
+        String firstLower = firstName.toLowerCase();
+        String lastLower = lastName.toLowerCase();
+        
+        // Match by last name first, then try first name
+        if (lastLower.equals("anterist") || lastLower.equals("anterist")) {
+            imageName = "Anterist.jpg";
+        } else if (lastLower.equals("gusic") || firstLower.equals("fabian")) {
+            // Try both gusic.webp and Fabian.jpg
+            imageName = "Fabian.jpg";
+        } else if (lastLower.equals("falster") || firstLower.equals("milla")) {
+            imageName = "Falster.jpg";
+        } else if (lastLower.equals("fruijtier") || firstLower.equals("stella")) {
+            imageName = "Fruijtier.jpg";
+        } else if (lastLower.equals("liu") || firstLower.equals("nancy")) {
+            imageName = "Liu.jpg";
+        } else if (lastLower.equals("mitrofanova") || firstLower.equals("nina")) {
+            imageName = "Mitrofanova.jpg";
+        } else if (lastLower.equals("cappelaro") || firstLower.equals("pietro")) {
+            imageName = "Pietro.jpg";
+        } else if (lastLower.equals("quaynor") || firstLower.equals("luke")) {
+            imageName = "Quaynor.jpg";
+        } else if (lastLower.equals("vlasova") || firstLower.equals("polina")) {
+            imageName = "Vlasova.jpg";
+        } else if (lastLower.equals("stoiberer") || firstLower.equals("richard") || firstLower.equals("richie")) {
+            // Handle Richie - might be Richie.jpg or similar
+            imageName = "Richie.jpg";
+        }
+        
+        // Return image path if found, otherwise null
+        if (imageName != null) {
+            return "/images/" + imageName;
+        }
+        return null;
     }
     
     private static Player findPlayerByName(String playerName, Map<String, Player> playerMap) {

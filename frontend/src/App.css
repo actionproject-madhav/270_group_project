@@ -56,6 +56,66 @@ body {
   z-index: 10;
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-name {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.logout-button {
+  background: rgba(255, 167, 38, 0.2);
+  border: 1px solid rgba(255, 167, 38, 0.4);
+  color: #FFA726;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.logout-button:hover {
+  background: rgba(255, 167, 38, 0.3);
+  border-color: #FFA726;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .user-info {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 .header::before {
   content: '';
   position: absolute;

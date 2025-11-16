@@ -1,12 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PlayersTab from './components/PlayersTab';
 import MatchesTab from './components/MatchesTab';
 import StatsTab from './components/StatsTab';
+import LoginPage from './components/LoginPage';
 import SplineBackground from './components/SplineBackground';
 import './App.css';
 
 function App() {
-  const [activeTab, setActiveTab] = React.useState('players');
+  const [activeTab, setActiveTab] = useState('players');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const authStatus = localStorage.getItem('isAuthenticated');
+    const userData = localStorage.getItem('user');
+    
+    if (authStatus === 'true' && userData) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLoginSuccess = (userData) => {
+    setUser(userData);
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('user');
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  // Show login page if not authenticated
+  if (!isAuthenticated) {
+    return <LoginPage onLoginSuccess={handleLoginSuccess} />;
+  }
 
   const appStyle = {
     minHeight: '100vh',
@@ -21,8 +52,27 @@ function App() {
     <div className="App" style={appStyle}>
       <SplineBackground />
       <header className="header">
-        <h1>ROLLINS TENNIS ARCHIVE</h1>
-        <p>Match Results & Player Statistics</p>
+        <div className="header-content">
+          <div>
+            <h1>ROLLINS TENNIS ARCHIVE</h1>
+            <p>Match Results & Player Statistics</p>
+          </div>
+          <div className="user-info">
+            {user && (
+              <>
+                <img 
+                  src={user.picture} 
+                  alt={user.name} 
+                  className="user-avatar"
+                />
+                <span className="user-name">{user.name}</span>
+                <button onClick={handleLogout} className="logout-button">
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
+        </div>
       </header>
 
       <nav className="navbar">
