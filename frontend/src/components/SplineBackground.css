@@ -19,3 +19,35 @@
   background: transparent;
 }
 
+/* Fallback tennis court background (green and white) */
+.tennis-court-fallback {
+  background: linear-gradient(135deg, #2d5016 0%, #3a6b1f 50%, #2d5016 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.tennis-court-pattern {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.1) 2px,
+      rgba(255, 255, 255, 0.1) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.1) 2px,
+      rgba(255, 255, 255, 0.1) 4px
+    );
+  opacity: 0.3;
+}
+

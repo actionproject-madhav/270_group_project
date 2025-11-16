@@ -148,9 +148,9 @@ function PlayersTab() {
             <button
               onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
               style={{
-                background: 'rgba(76, 175, 80, 0.2)',
-                color: '#4CAF50',
-                border: '1px solid rgba(76, 175, 80, 0.3)',
+                background: 'rgba(255, 167, 38, 0.2)',
+                color: '#FFA726',
+                border: '1px solid rgba(255, 167, 38, 0.3)',
                 borderRadius: '6px',
                 padding: '6px 10px',
                 fontSize: '12px',
@@ -194,7 +194,7 @@ function PlayersTab() {
                   borderRadius: '50%',
                   background: player.image 
                     ? `url(${player.image})` 
-                    : 'linear-gradient(135deg, #4CAF50, #66BB6A)',
+                    : 'linear-gradient(135deg, #FFA726, #FFB74D)',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   display: 'flex',
@@ -203,8 +203,9 @@ function PlayersTab() {
                   color: '#fff',
                   fontWeight: 'bold',
                   fontSize: '18px',
-                  border: '2px solid rgba(76, 175, 80, 0.3)',
-                  flexShrink: 0
+                  border: '2px solid rgba(255, 167, 38, 0.4)',
+                  flexShrink: 0,
+                  overflow: 'hidden'
                 }}>
                   {!player.image && `${player.firstName[0]}${player.lastName[0]}`}
                 </div>
@@ -220,7 +221,7 @@ function PlayersTab() {
                 </div>
                 <div style={{
                   fontSize: '18px',
-                  color: selectedPlayer?.id === player.id ? '#4CAF50' : '#666',
+                  color: selectedPlayer?.id === player.id ? '#FFA726' : '#666',
                   transition: 'color 0.3s ease'
                 }}>
                   →
@@ -243,7 +244,7 @@ function PlayersTab() {
                 borderRadius: '50%',
                 background: selectedPlayer.image 
                   ? `url(${selectedPlayer.image})` 
-                  : 'linear-gradient(135deg, #4CAF50, #66BB6A)',
+                  : 'linear-gradient(135deg, #FFA726, #FFB74D)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
@@ -252,10 +253,11 @@ function PlayersTab() {
                 color: '#fff',
                 fontWeight: 'bold',
                 fontSize: '32px',
-                border: '3px solid rgba(76, 175, 80, 0.5)',
+                border: '3px solid rgba(255, 167, 38, 0.5)',
                 margin: '0 auto',
-                boxShadow: '0 8px 25px rgba(76, 175, 80, 0.3)',
-                transition: 'all 0.3s ease'
+                boxShadow: '0 8px 25px rgba(255, 167, 38, 0.3)',
+                transition: 'all 0.3s ease',
+                overflow: 'hidden'
               }}>
                 {!selectedPlayer.image && `${selectedPlayer.firstName[0]}${selectedPlayer.lastName[0]}`}
               </div>
@@ -270,8 +272,8 @@ function PlayersTab() {
               <div className="detail-label">Class Year</div>
               <div className="detail-value">
                 <span style={{
-                  background: 'rgba(76, 175, 80, 0.2)',
-                  color: '#4CAF50',
+                  background: 'rgba(255, 167, 38, 0.2)',
+                  color: '#FFA726',
                   padding: '4px 8px',
                   borderRadius: '4px',
                   fontSize: '14px',
@@ -299,13 +301,13 @@ function PlayersTab() {
               <div className="detail-label">UTR Rating</div>
               <div className="detail-value">
                 <span style={{
-                  background: 'linear-gradient(135deg, #4CAF50, #66BB6A)',
+                  background: 'linear-gradient(135deg, #FFA726, #FFB74D)',
                   color: '#fff',
                   padding: '6px 12px',
                   borderRadius: '8px',
                   fontSize: '16px',
                   fontWeight: '700',
-                  boxShadow: '0 4px 12px rgba(76, 175, 80, 0.3)'
+                  boxShadow: '0 4px 12px rgba(255, 167, 38, 0.3)'
                 }}>
                   {selectedPlayer.utr}
                 </span>
@@ -322,8 +324,8 @@ function PlayersTab() {
                 <div style={{
                   width: '30px',
                   height: '30px',
-                  border: '3px solid rgba(76, 175, 80, 0.3)',
-                  borderTop: '3px solid #4CAF50',
+                  border: '3px solid rgba(255, 167, 38, 0.3)',
+                  borderTop: '3px solid #FFA726',
                   borderRadius: '50%',
                   animation: 'spin 1s linear infinite',
                   margin: '0 auto 15px'

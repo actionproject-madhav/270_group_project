@@ -152,10 +152,10 @@ public class ExcelDataLoader {
         String lastLower = lastName.toLowerCase();
         
         // Match by last name first, then try first name
-        if (lastLower.equals("anterist") || lastLower.equals("anterist")) {
+        if (lastLower.equals("anterist")) {
             imageName = "Anterist.jpg";
         } else if (lastLower.equals("gusic") || firstLower.equals("fabian")) {
-            // Try both gusic.webp and Fabian.jpg
+            // Prefer Fabian.jpg over gusic.webp
             imageName = "Fabian.jpg";
         } else if (lastLower.equals("falster") || firstLower.equals("milla")) {
             imageName = "Falster.jpg";
@@ -172,8 +172,8 @@ public class ExcelDataLoader {
         } else if (lastLower.equals("vlasova") || firstLower.equals("polina")) {
             imageName = "Vlasova.jpg";
         } else if (lastLower.equals("stoiberer") || firstLower.equals("richard") || firstLower.equals("richie")) {
-            // Handle Richie - might be Richie.jpg or similar
-            imageName = "Richie.jpg";
+            // Richie file has no extension - it's a JPEG
+            imageName = "Richie";
         }
         
         // Return image path if found, otherwise null
