@@ -3,13 +3,13 @@ import PlayersTab from './components/PlayersTab';
 import MatchesTab from './components/MatchesTab';
 import StatsTab from './components/StatsTab';
 import LoginPage from './components/LoginPage';
-import SplineBackground from './components/SplineBackground';
 import './App.css';
 
 function App() {
   const [activeTab, setActiveTab] = useState('players');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
     // Check if user is already logged in
@@ -20,7 +20,23 @@ function App() {
       setIsAuthenticated(true);
       setUser(JSON.parse(userData));
     }
+
+    // Check saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setIsDarkMode(savedTheme === 'dark');
+    }
   }, []);
+
+  useEffect(() => {
+    // Apply theme to document
+    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   const handleLoginSuccess = (userData) => {
     setUser(userData);
@@ -44,13 +60,11 @@ function App() {
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
-    zIndex: 1,
-    backgroundColor: 'transparent'
+    zIndex: 1
   };
 
   return (
     <div className="App" style={appStyle}>
-      <SplineBackground />
       <header className="header">
         <div className="header-content">
           <div>
@@ -58,6 +72,9 @@ function App() {
             <p>Match Results & Player Statistics</p>
           </div>
           <div className="user-info">
+            <button onClick={toggleTheme} className="theme-toggle" title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+              {isDarkMode ? '☀️' : '🌙'}
+            </button>
             {user && (
               <>
                 <img 

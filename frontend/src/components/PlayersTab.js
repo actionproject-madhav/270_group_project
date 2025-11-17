@@ -194,7 +194,7 @@ function PlayersTab() {
                   borderRadius: '50%',
                   background: player.image 
                     ? `url(${player.image})` 
-                    : 'linear-gradient(135deg, #FFA726, #FFB74D)',
+                    : 'linear-gradient(135deg, #000000, #333333)',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   display: 'flex',
@@ -203,7 +203,7 @@ function PlayersTab() {
                   color: '#fff',
                   fontWeight: 'bold',
                   fontSize: '18px',
-                  border: '2px solid rgba(255, 167, 38, 0.4)',
+                  border: '2px solid rgba(255, 255, 255, 0.4)',
                   flexShrink: 0,
                   overflow: 'hidden'
                 }}>
@@ -221,7 +221,7 @@ function PlayersTab() {
                 </div>
                 <div style={{
                   fontSize: '18px',
-                  color: selectedPlayer?.id === player.id ? '#FFA726' : '#666',
+                  color: selectedPlayer?.id === player.id ? '#ffffff' : '#666',
                   transition: 'color 0.3s ease'
                 }}>
                   →
@@ -239,12 +239,12 @@ function PlayersTab() {
             
             <div style={{ textAlign: 'center', marginBottom: '25px' }}>
               <div style={{
-                width: '120px',
-                height: '120px',
+                width: '220px',
+                height: '220px',
                 borderRadius: '50%',
                 background: selectedPlayer.image 
                   ? `url(${selectedPlayer.image})` 
-                  : 'linear-gradient(135deg, #FFA726, #FFB74D)',
+                  : 'linear-gradient(135deg, #000000, #333333)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
@@ -252,10 +252,10 @@ function PlayersTab() {
                 justifyContent: 'center',
                 color: '#fff',
                 fontWeight: 'bold',
-                fontSize: '32px',
-                border: '3px solid rgba(255, 167, 38, 0.5)',
+                fontSize: '48px',
+                border: '4px solid rgba(255, 255, 255, 0.5)',
                 margin: '0 auto',
-                boxShadow: '0 8px 25px rgba(255, 167, 38, 0.3)',
+                boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
                 transition: 'all 0.3s ease',
                 overflow: 'hidden'
               }}>
@@ -272,8 +272,8 @@ function PlayersTab() {
               <div className="detail-label">Class Year</div>
               <div className="detail-value">
                 <span style={{
-                  background: 'rgba(255, 167, 38, 0.2)',
-                  color: '#FFA726',
+                  background: 'rgba(0, 0, 0, 0.2)',
+                  color: '#ffffff',
                   padding: '4px 8px',
                   borderRadius: '4px',
                   fontSize: '14px',
@@ -301,13 +301,13 @@ function PlayersTab() {
               <div className="detail-label">UTR Rating</div>
               <div className="detail-value">
                 <span style={{
-                  background: 'linear-gradient(135deg, #FFA726, #FFB74D)',
+                  background: 'linear-gradient(135deg, #000000, #333333)',
                   color: '#fff',
                   padding: '6px 12px',
                   borderRadius: '8px',
                   fontSize: '16px',
                   fontWeight: '700',
-                  boxShadow: '0 4px 12px rgba(255, 167, 38, 0.3)'
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
                 }}>
                   {selectedPlayer.utr}
                 </span>
@@ -324,8 +324,8 @@ function PlayersTab() {
                 <div style={{
                   width: '30px',
                   height: '30px',
-                  border: '3px solid rgba(255, 167, 38, 0.3)',
-                  borderTop: '3px solid #FFA726',
+                  border: '3px solid rgba(255, 255, 255, 0.3)',
+                  borderTop: '3px solid #ffffff',
                   borderRadius: '50%',
                   animation: 'spin 1s linear infinite',
                   margin: '0 auto 15px'

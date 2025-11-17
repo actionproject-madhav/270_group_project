@@ -172,8 +172,7 @@ public class ExcelDataLoader {
         } else if (lastLower.equals("vlasova") || firstLower.equals("polina")) {
             imageName = "Vlasova.jpg";
         } else if (lastLower.equals("stoiberer") || firstLower.equals("richard") || firstLower.equals("richie")) {
-            // Richie file has no extension - it's a JPEG
-            imageName = "Richie";
+            imageName = "Richie.jpg";
         }
         
         // Return image path if found, otherwise null
