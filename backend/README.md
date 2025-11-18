@@ -56,11 +56,11 @@ Response: { player, wins, losses, winPercentage }
 
 ## OOP Features
 
-✅ Abstract Match class with concrete subclasses  
-✅ Encapsulation (private fields, public getters)  
-✅ Inheritance (SinglesMatch, DoublesMatch extend Match)  
-✅ Polymorphism (List<Match> holds subclasses)  
-✅ Data structures (ArrayList, HashMap)  
+- Abstract Match class with concrete subclasses  
+- Encapsulation (private fields, public getters)  
+- Inheritance (SinglesMatch, DoublesMatch extend Match)  
+- Polymorphism (List<Match> holds subclasses)  
+- Data structures (ArrayList, HashMap)  
 
 ## Sample Data
 
