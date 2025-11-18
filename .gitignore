@@ -11,3 +11,21 @@
 frontend/.env
 frontend/.env.local
 
+# Node modules
+node_modules/
+frontend/node_modules/
+**/node_modules/
+
+# Build outputs
+out/
+*.class
+*.jar
+!gson.jar
+
+# Logs
+*.log
+server.log
+
+# OS files
+.DS_Store
+
