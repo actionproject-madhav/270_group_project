@@ -189,23 +189,25 @@ function PlayersTab() {
                 }}
               >
                 <div style={{
-                  width: '60px',
-                  height: '60px',
+                  width: '80px',
+                  height: '80px',
                   borderRadius: '50%',
                   background: player.image 
                     ? `url(${player.image})` 
                     : 'linear-gradient(135deg, #000000, #333333)',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
+                  backgroundSize: player.image ? '150%' : 'cover',
+                  backgroundPosition: player.image ? 'center top' : 'center',
+                  backgroundRepeat: 'no-repeat',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#fff',
                   fontWeight: 'bold',
-                  fontSize: '18px',
+                  fontSize: '20px',
                   border: '2px solid rgba(255, 255, 255, 0.4)',
                   flexShrink: 0,
-                  overflow: 'hidden'
+                  overflow: 'hidden',
+                  backgroundColor: player.image ? 'rgba(0, 0, 0, 0.1)' : 'transparent'
                 }}>
                   {!player.image && `${player.firstName[0]}${player.lastName[0]}`}
                 </div>
@@ -239,25 +241,27 @@ function PlayersTab() {
             
             <div style={{ textAlign: 'center', marginBottom: '25px' }}>
               <div style={{
-                width: '220px',
-                height: '220px',
+                width: '280px',
+                height: '280px',
                 borderRadius: '50%',
                 background: selectedPlayer.image 
                   ? `url(${selectedPlayer.image})` 
                   : 'linear-gradient(135deg, #000000, #333333)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundSize: selectedPlayer.image ? 'contain' : 'cover',
+                backgroundPosition: selectedPlayer.image ? 'center center' : 'center',
+                backgroundRepeat: 'no-repeat',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#fff',
                 fontWeight: 'bold',
-                fontSize: '48px',
+                fontSize: '56px',
                 border: '4px solid rgba(255, 255, 255, 0.5)',
                 margin: '0 auto',
                 boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
                 transition: 'all 0.3s ease',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                backgroundColor: selectedPlayer.image ? 'rgba(0, 0, 0, 0.2)' : 'transparent'
               }}>
                 {!selectedPlayer.image && `${selectedPlayer.firstName[0]}${selectedPlayer.lastName[0]}`}
               </div>

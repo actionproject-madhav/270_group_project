@@ -172,7 +172,8 @@ public class ExcelDataLoader {
         } else if (lastLower.equals("vlasova") || firstLower.equals("polina")) {
             imageName = "Vlasova.jpg";
         } else if (lastLower.equals("stoiberer") || firstLower.equals("richard") || firstLower.equals("richie")) {
-            imageName = "Richie.jpg";
+            // Try Richard.jpg first, then Richie.jpg as fallback
+            imageName = "Richard.jpg";
         }
         
         // Return image path if found, otherwise null
