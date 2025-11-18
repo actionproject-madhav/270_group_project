@@ -16,6 +16,11 @@ node_modules/
 frontend/node_modules/
 **/node_modules/
 
+# Cache directories
+**/.cache/
+**/*.cache
+.cache/
+
 # Build outputs
 out/
 *.class
