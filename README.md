@@ -1,8 +1,6 @@
 # Rollins Tennis Archive - Full Stack Application
 *A Java OOP Project by Madhav Khanal, Stella Fruijtier and Richard Stoiberer*
 
-## Status: READY TO USE ✅
-
 ### What's Running
 
 1. **Backend Server** (Java REST API) - Port 8080
@@ -122,12 +120,6 @@ curl http://localhost:8080/api/player/P001
     └── package.json
 ```
 
-## Sample Data
-
-- **5 Players**: John Smith, Maria Garcia, David Lee, Emma Johnson, Carlos Rodriguez
-- **7 Matches**: 4 singles, 3 doubles across 2022-2024
-- **Opponents**: Florida Southern, Lynn University, Barry University, etc.
-
 ## Stopping the Servers
 
 ```bash
@@ -140,9 +132,9 @@ pkill -f "react-scripts"
 
 ## Features
 
-- ✅ Clean black & white UI
-- ✅ REST API with Java backend
-- ✅ React frontend
-- ✅ All OOP principles demonstrated
-- ✅ Sample data pre-loaded
-- ✅ Ready to demonstrate
+- Clean black & white UI
+- REST API with Java backend
+- React frontend
+- All OOP principles demonstrated
+- Sample data pre-loaded
+- Ready to demonstrate
