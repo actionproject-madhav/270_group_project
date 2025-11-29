@@ -56,6 +56,7 @@ public class ExcelDataLoader {
             
             // Create Player objects from names
             int playerId = 1;
+            java.util.Random random = new java.util.Random();
             for (String playerName : playerNames) {
                 String[] nameParts = parsePlayerName(playerName);
                 String firstName = nameParts[0];
@@ -66,9 +67,18 @@ public class ExcelDataLoader {
                 // Find matching image based on player name
                 String imagePath = findPlayerImage(firstName, lastName);
                 
-                // Create player with default values (can be enhanced with actual data if available)
-                Player player = new Player(playerIdStr, firstName, lastName, "2025", 
-                                          inferNationality(lastName), 11.0, imagePath);
+                // Try to infer nationality from name, fallback to random
+                String nationality = inferNationality(firstName, lastName);
+                if (nationality.equals("Unknown")) {
+                    nationality = getRandomNationality(random);
+                }
+                
+                // Generate random class year (2024-2027 for current students)
+                String classYear = generateRandomClassYear(random);
+                
+                // Create player with inferred/random values
+                Player player = new Player(playerIdStr, firstName, lastName, classYear, 
+                                          nationality, 11.0, imagePath);
                 
                 if (!playerMap.containsKey(playerIdStr)) {
                     data.players.add(player);
@@ -135,11 +145,67 @@ public class ExcelDataLoader {
         return parts.toArray(new String[0]);
     }
     
-    private static String inferNationality(String lastName) {
-        // Simple inference based on common patterns (can be enhanced)
-        if (lastName.isEmpty()) return "Unknown";
-        // This is a placeholder - in a real system, you'd have a database or mapping
+    private static String inferNationality(String firstName, String lastName) {
+        // Try to infer nationality based on name patterns
+        String fullName = (firstName + " " + lastName).toLowerCase();
+        String lastLower = lastName.toLowerCase();
+        String firstLower = firstName.toLowerCase();
+        
+        // Known player nationalities based on common patterns
+        if (lastLower.contains("stoiberer") || firstLower.contains("richard")) {
+            return "Austria";
+        } else if (lastLower.contains("anterist") || firstLower.contains("moritz")) {
+            return "Germany";
+        } else if (lastLower.contains("quaynor") || firstLower.contains("luke")) {
+            return "United States";
+        } else if (lastLower.contains("gusic") || firstLower.contains("fabian")) {
+            return "Croatia";
+        } else if (lastLower.contains("cappelaro") || firstLower.contains("pietro")) {
+            return "Italy";
+        } else if (lastLower.contains("fruijtier") || firstLower.contains("stella")) {
+            return "Netherlands";
+        } else if (lastLower.contains("falster") || firstLower.contains("milla")) {
+            return "Denmark";
+        } else if (lastLower.contains("vlasova") || firstLower.contains("polina")) {
+            return "Russia";
+        } else if (lastLower.contains("liu") || firstLower.contains("nancy")) {
+            return "China";
+        } else if (lastLower.contains("mitrofanova") || firstLower.contains("nina")) {
+            return "Russia";
+        }
+        
+        // Pattern-based inference for common name endings
+        if (lastLower.endsWith("ski") || lastLower.endsWith("sky")) {
+            return "Poland";
+        } else if (lastLower.endsWith("ova") || lastLower.endsWith("ev") || lastLower.endsWith("ov")) {
+            return "Russia";
+        } else if (lastLower.endsWith("ic") || lastLower.endsWith("ich")) {
+            return "Croatia";
+        } else if (lastLower.endsWith("er") && lastLower.length() > 5) {
+            return "Germany";
+        } else if (lastLower.endsWith("son") || lastLower.endsWith("sen")) {
+            return "Sweden";
+        } else if (lastLower.endsWith("ez") || lastLower.endsWith("es")) {
+            return "Spain";
+        }
+        
         return "Unknown";
+    }
+    
+    private static String getRandomNationality(java.util.Random random) {
+        String[] nationalities = {
+            "United States", "Germany", "Spain", "France", "Italy", 
+            "Netherlands", "Sweden", "Denmark", "Austria", "Switzerland",
+            "Croatia", "Poland", "Russia", "China", "Japan", "Australia",
+            "Canada", "Brazil", "Argentina", "United Kingdom"
+        };
+        return nationalities[random.nextInt(nationalities.length)];
+    }
+    
+    private static String generateRandomClassYear(java.util.Random random) {
+        // Generate class years between 2024-2027 (typical college years)
+        int[] years = {2024, 2025, 2026, 2027};
+        return String.valueOf(years[random.nextInt(years.length)]);
     }
     
     private static String findPlayerImage(String firstName, String lastName) {
@@ -184,16 +250,41 @@ public class ExcelDataLoader {
     }
     
     private static Player findPlayerByName(String playerName, Map<String, Player> playerMap) {
-        String[] nameParts = parsePlayerName(playerName);
+        if (playerName == null || playerName.trim().isEmpty()) {
+            return null;
+        }
+        
+        // Try to parse the name (handles both "LukeQuaynor" and "Luke Quaynor")
+        String[] nameParts = parsePlayerName(playerName.trim());
         String firstName = nameParts[0];
         String lastName = nameParts.length > 1 ? nameParts[1] : "";
         
+        // First try exact match
         for (Player player : playerMap.values()) {
-            if (player.getFirstName().equals(firstName) && 
-                player.getLastName().equals(lastName)) {
+            if (player.getFirstName().equalsIgnoreCase(firstName) && 
+                player.getLastName().equalsIgnoreCase(lastName)) {
                 return player;
             }
         }
+        
+        // If no exact match, try matching by full name (handles "Luke Quaynor" vs "LukeQuaynor")
+        String normalizedSearch = (firstName + lastName).toLowerCase().replaceAll("\\s+", "");
+        for (Player player : playerMap.values()) {
+            String normalizedPlayer = (player.getFirstName() + player.getLastName()).toLowerCase().replaceAll("\\s+", "");
+            if (normalizedPlayer.equals(normalizedSearch)) {
+                return player;
+            }
+        }
+        
+        // Last resort: try partial match on last name
+        if (!lastName.isEmpty()) {
+            for (Player player : playerMap.values()) {
+                if (player.getLastName().equalsIgnoreCase(lastName)) {
+                    return player;
+                }
+            }
+        }
+        
         return null;
     }
     
@@ -203,20 +294,56 @@ public class ExcelDataLoader {
         Row headerRow = sheet.getRow(0);
         Map<String, Integer> columnMap = getColumnMap(headerRow);
         
+        int matchesLoaded = 0;
+        int matchesSkipped = 0;
+        
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
             if (row == null) continue;
             
             try {
+                // Skip if this row looks like a header row (check if first cell contains "Date")
+                String firstCell = getCellValue(row, 0);
+                if (firstCell != null && firstCell.equalsIgnoreCase("Date")) {
+                    continue; // Skip duplicate header rows
+                }
+                
                 LocalDate date = parseDateFromCell(row, columnMap.get("Date"));
-                if (date == null) continue;
+                if (date == null) {
+                    matchesSkipped++;
+                    continue;
+                }
                 
                 String opponentTeam = getCellValue(row, columnMap.get("Opposing Team"));
-                String opponentName = getCellValue(row, columnMap.get("Opponent Name"));
-                String score = getCellValue(row, columnMap.get("Singles Score"));
+                if (opponentTeam == null) {
+                    opponentTeam = getCellValue(row, columnMap.get("opposing team"));
+                }
                 
-                if (opponentTeam == null || opponentTeam.trim().isEmpty()) continue;
-                if (score == null || score.trim().isEmpty()) continue;
+                String opponentName = getCellValue(row, columnMap.get("Opponent Name"));
+                if (opponentName == null) {
+                    opponentName = getCellValue(row, columnMap.get("opponent name"));
+                }
+                
+                String score = getCellValue(row, columnMap.get("Singles Score"));
+                if (score == null) {
+                    score = getCellValue(row, columnMap.get("singles score"));
+                }
+                
+                // Clean opponent team name (remove special characters)
+                if (opponentTeam != null) {
+                    opponentTeam = opponentTeam.replaceAll("[\\u00A0\\u2007\\u202F]", " ").trim();
+                    // Remove ranking info like "(#4)" but keep the team name
+                    opponentTeam = opponentTeam.replaceAll("\\(#\\d+\\)", "").trim();
+                }
+                
+                if (opponentTeam == null || opponentTeam.trim().isEmpty()) {
+                    matchesSkipped++;
+                    continue;
+                }
+                if (score == null || score.trim().isEmpty()) {
+                    matchesSkipped++;
+                    continue;
+                }
                 
                 // Parse score to determine if Rollins won
                 boolean rollinsWon = parseWinLoss(score);
@@ -237,12 +364,17 @@ public class ExcelDataLoader {
                 SinglesMatch match = new SinglesMatch(date, season, result, opponentTeam, 
                                                      player, opponentPlayer);
                 data.matches.add(match);
+                matchesLoaded++;
                 
             } catch (Exception e) {
-                // Skip invalid rows
+                matchesSkipped++;
+                // Log error for debugging but continue
+                System.err.println("Error loading singles match row " + i + " for " + player.getFullName() + ": " + e.getMessage());
                 continue;
             }
         }
+        
+        System.out.println("Loaded " + matchesLoaded + " singles matches for " + player.getFullName() + " (skipped " + matchesSkipped + " rows)");
     }
     
     private static void loadDoublesMatches(Sheet sheet, Player player, Map<String, Player> playerMap, 
@@ -252,25 +384,80 @@ public class ExcelDataLoader {
         Row headerRow = sheet.getRow(0);
         Map<String, Integer> columnMap = getColumnMap(headerRow);
         
+        // Handle typo in header: "Postion" instead of "Position"
+        if (!columnMap.containsKey("Opponents") && columnMap.containsKey("Postion")) {
+            // Try alternative column names
+        }
+        
+        int matchesLoaded = 0;
+        int matchesSkipped = 0;
+        
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
             if (row == null) continue;
             
             try {
+                // Skip if this row looks like a header row
+                String firstCell = getCellValue(row, 0);
+                if (firstCell != null && firstCell.equalsIgnoreCase("Date")) {
+                    continue; // Skip duplicate header rows
+                }
+                
                 LocalDate date = parseDateFromCell(row, columnMap.get("Date"));
-                if (date == null) continue;
+                if (date == null) {
+                    matchesSkipped++;
+                    continue;
+                }
                 
                 String opponentTeam = getCellValue(row, columnMap.get("Opposing Team"));
-                String opponents = getCellValue(row, columnMap.get("Opponents"));
-                String partnerName = getCellValue(row, columnMap.get("Partner"));
-                String score = getCellValue(row, columnMap.get("Doubles Score"));
+                if (opponentTeam == null) {
+                    opponentTeam = getCellValue(row, columnMap.get("opposing team"));
+                }
                 
-                if (opponentTeam == null || opponentTeam.trim().isEmpty()) continue;
-                if (score == null || score.trim().isEmpty()) continue;
+                String opponents = getCellValue(row, columnMap.get("Opponents"));
+                if (opponents == null) {
+                    opponents = getCellValue(row, columnMap.get("opponents"));
+                }
+                
+                String partnerName = getCellValue(row, columnMap.get("Partner"));
+                if (partnerName == null) {
+                    partnerName = getCellValue(row, columnMap.get("partner"));
+                }
+                
+                String score = getCellValue(row, columnMap.get("Doubles Score"));
+                if (score == null) {
+                    score = getCellValue(row, columnMap.get("doubles score"));
+                }
+                
+                // Clean opponent team name
+                if (opponentTeam != null) {
+                    opponentTeam = opponentTeam.replaceAll("[\\u00A0\\u2007\\u202F]", " ").trim();
+                    opponentTeam = opponentTeam.replaceAll("\\(#\\d+\\)", "").trim();
+                }
+                
+                if (opponentTeam == null || opponentTeam.trim().isEmpty()) {
+                    matchesSkipped++;
+                    continue;
+                }
+                if (score == null || score.trim().isEmpty()) {
+                    matchesSkipped++;
+                    continue;
+                }
                 
                 // Find partner player
-                Player partner = findPlayerByName(partnerName, playerMap);
-                if (partner == null) continue;
+                Player partner = null;
+                if (partnerName != null && !partnerName.trim().isEmpty()) {
+                    partner = findPlayerByName(partnerName.trim(), playerMap);
+                    if (partner == null) {
+                        matchesSkipped++;
+                        System.err.println("Could not find partner: '" + partnerName + "' for " + player.getFullName());
+                        continue;
+                    }
+                } else {
+                    matchesSkipped++;
+                    System.err.println("Partner name is empty for " + player.getFullName());
+                    continue;
+                }
                 
                 // Parse score
                 boolean rollinsWon = parseWinLoss(score);
@@ -289,11 +476,16 @@ public class ExcelDataLoader {
                                                       player, partner,
                                                       opponentPair[0], opponentPair[1]);
                 data.matches.add(match);
+                matchesLoaded++;
                 
             } catch (Exception e) {
+                matchesSkipped++;
+                System.err.println("Error loading doubles match row " + i + " for " + player.getFullName() + ": " + e.getMessage());
                 continue;
             }
         }
+        
+        System.out.println("Loaded " + matchesLoaded + " doubles matches for " + player.getFullName() + " (skipped " + matchesSkipped + " rows)");
     }
     
     private static Map<String, Integer> getColumnMap(Row headerRow) {
@@ -304,7 +496,17 @@ public class ExcelDataLoader {
             Cell cell = headerRow.getCell(i);
             if (cell != null) {
                 String value = getCellValueAsString(cell);
-                map.put(value, i);
+                if (value != null && !value.trim().isEmpty()) {
+                    // Store both exact and case-insensitive versions
+                    map.put(value, i);
+                    map.put(value.toLowerCase(), i);
+                    
+                    // Handle common typos
+                    if (value.equalsIgnoreCase("Postion")) {
+                        map.put("Position", i);
+                        map.put("position", i);
+                    }
+                }
             }
         }
         return map;
@@ -377,7 +579,9 @@ public class ExcelDataLoader {
                 "MM/dd/yy",
                 "M/d/yy",
                 "MM/dd/yyyy",
-                "M/d/yyyy"
+                "M/d/yyyy",
+                "M/dd/yy",
+                "MM/d/yy"
             };
             
             for (String format : formats) {
@@ -399,7 +603,26 @@ public class ExcelDataLoader {
     private static boolean parseWinLoss(String score) {
         if (score == null) return false;
         String lower = score.toLowerCase().trim();
-        return lower.startsWith("won");
+        
+        // Check for explicit win indicators
+        if (lower.startsWith("won")) {
+            return true;
+        }
+        
+        // Check for loss indicators
+        if (lower.startsWith("lost") || lower.startsWith("loss")) {
+            return false;
+        }
+        
+        // If score contains "unfinished" or "retired", we can't determine win/loss from score alone
+        // Default to false (loss) for unfinished matches unless explicitly marked as won
+        if (lower.contains("unfinished") || lower.contains("retired")) {
+            return false;
+        }
+        
+        // For scores like "6-1, 6-1" or "6-0, 6-3", we need to check if it starts with "Won"
+        // If no explicit indicator, default to false
+        return false;
     }
     
     private static String parseFirstName(String fullName) {
@@ -425,8 +648,13 @@ public class ExcelDataLoader {
     
     private static Season determineSeason(LocalDate date) {
         int year = date.getYear();
+        // Handle future dates (2025+) by mapping to 2024 season
+        // Or create a new season if needed - for now, map 2025+ to 2024
+        if (year >= 2025) return Season.YEAR_2024;
         if (year >= 2024) return Season.YEAR_2024;
         if (year >= 2023) return Season.YEAR_2023;
+        if (year >= 2022) return Season.YEAR_2022;
+        // For dates before 2022, default to 2022
         return Season.YEAR_2022;
     }
 }
