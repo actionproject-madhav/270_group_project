@@ -41,6 +41,7 @@ The app is inspired by the **Rollins College Tennis Team**, aiming to organize t
    - Overall team record
    - Season breakdown (2022-2024)
    - Individual player records table
+   - Various Visualizations
 
 ## Core Features  
 - **Player Bios** – View each player's profile, including name, nationality, class year, and UTR rating.  
